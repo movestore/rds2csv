@@ -6,6 +6,7 @@
       {
         "name": "move"
       }
-	]
-  }
+    ]
+  },
+  "createsArtifacts": true
 }
