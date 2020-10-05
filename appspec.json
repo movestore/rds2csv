@@ -1,0 +1,11 @@
+{
+  "settings": [
+  ],
+  "dependencies": {
+    "R": [
+      {
+        "name": "move"
+      }
+	]
+  }
+}
