@@ -2,7 +2,7 @@ library('move')
 
 rFunction <- function(data)
 {
-  Sys.setenv(tz="GMT")
+  Sys.setenv(tz="UTC")
   
   data.csv <- as.data.frame(data)
   data.csv.nona <- data.csv[,!sapply(data.csv, function(x) all(is.na(x)))]
