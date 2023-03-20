@@ -1,4 +1,4 @@
-# rds 2 csv
+# Write CSV
 MoveApps
 
 Github repository: *github.com/movestore/rds2csv*
@@ -18,8 +18,8 @@ moveStack in Movebank format
 ### Artefacts
 `data.csv`: input data set as csv table, including only columns that are not all NA
 
-### Parameters 
-no parameters
+### Settings
+no settings
 
 ### Null or error handling:
 **Data:** The full input data set is returned for further use in a next App and cannot be empty.
