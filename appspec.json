@@ -1,41 +1,81 @@
 {
   "settings": [
+    {
+      "id": "sdk",
+      "name": "The name of the MoveApps SDK",
+      "description": "Showcase requesting a string input from the users of your app.",
+      "defaultValue": "MoveApps SDK",
+      "type": "STRING"
+    },
+    {
+      "id": "year",
+      "name": "The year",
+      "description": "Insert description for the year setting setting",
+      "defaultValue": 2022,
+      "type": "INTEGER"
+    },
+    {
+      "id": "yourLocalFileSettingId",
+      "name": "Personalization",
+      "description": "You can personalize the dashboard by providing a file named 'sample.txt'",
+      "type": "LOCAL_FILE"
+    }
   ],
   "dependencies": {
     "R": [
       {
-        "name": "move"
+        "name": "lubridate"
+      },
+      {
+        "name": "move2"
       }
     ]
   },
   "createsArtifacts": true,
+  "providedAppFiles": [
+    {
+      "settingId": "yourLocalFileSettingId",
+      "from": "data/local_app_files/provided-app-files/yourLocalFileSettingId/"
+    }
+  ],
   "license": {
     "key": "MIT"
   },
   "language": "eng",
   "keywords": [
-    "rds",
-    "csv",
-    "transformation",
-	"data",
-	"table",
+    "example",
+    "template"
   ],
   "people": [
     {
-     "firstName": "Andrea",
+      "firstName": "Charles",
       "middleInitials": null,
-      "lastName": "Kölzsch",
-      "email": "akoelzsch@ab.mpg.de",
+      "lastName": "Darwin",
+      "email": "creator@example.com",
       "roles": [
         "author",
         "creator"
       ],
-      "orcid": "0000-0003-0193-1563",
-      "affiliation": "Max-Planck-Institute of Animal Behavior",
-      "affiliationRor": "https://ror.org/026stee22"
+      "orcid": null,
+      "affiliation": null,
+      "affiliationRor": null
+    }
+  ],
+  "funding": [
+    {
+      "name": "funder name",
+      "comment": "grant for App"
+    }
+  ],
+  "references": [
+    {
+      "type": "IsDescribedBy",
+      "note": "Darwin, C. 1900. The creation. Journal XY. 1-2",
+      "url": "https://anylink.xyz"
     }
   ],
   "documentation": {
-    "url": "https://github.com/movestore/rds2csv/blob/master/README.md"
+    "url": "https://github.com/yourAccount/my-app/README.md"
   }
 }
+
