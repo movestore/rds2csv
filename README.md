@@ -1,39 +1,39 @@
-# Name of App *(Give your app a short and informative title. Please adhere to our convention of Title Case without hyphens (e.g. My New App))*
+# Write CSV
 
 MoveApps
 
-Github repository: *github.com/yourAccount/Name-of-App* *(the link to the repository where the code of the app can be found must be provided)*
+Github repository: *github.com/movestore/rds2csv*
 
 ## Description
-*Enter here the short description of the App that might also be used when filling out the description when submitting the App to Moveapps. This text is directly presented to Users that look through the list of Apps when compiling Workflows.*
+Movement data (in R-format rds) is transformed into a csv-data.frame that is returned as artefact and can be downloaded. Either two files (locations and track info) are returned or one file with locations and track info integrated. The original data set is also passed on as output to a possible next App. 
 
 ## Documentation
-*Enter here a detailed description of your App. What is it intended to be used for. Which steps of analyses are performed and how. Please be explicit about any detail that is important for use and understanding of the App and its outcomes.*
+The input Movement data set is transformed into a table (data frame) with a row for each location and columns indicating the timestamp, track ID, location coordiantes (longitude, latitude) and other properties of the locations. Optionally, the track information will be added to this table or provided as a second artefact file. For better readability, only properties (columns) with (non-NA/non-empty) information in at least one row are retained. 
+
+This integrated data and track info is returned as an artefact named `data_and_trackinfo.csv`. In case this is not selected, two artefacts named `data.csv` and `trackInfo.csv` are generated.
+
+The column `timestamp` is reformatted to include three decimals in the seconds, so that the format will be fit for submission to annotation with EnvDATA in Movebank.
 
 ### Input data
-*Indicate which type of input data the App requires. Currently only R objects of class `MoveStack` can be used. This will be extend in the future.*
-
-*Example*: MoveStack in Movebank format
+move2::move2_loc object
 
 ### Output data
-*Indicate which type of output data the App produces to be passed on to subsequent apps. Currently only R objects of class `MoveStack` can be used. This will be extend in the future. In case the App does not pass on any data (e.g. a shiny visualization app), it can be also indicated here that no output is produced to be used in subsequent apps.*
-
-*Example:* MoveStack in Movebank format
+move2::move2_loc object - same as input data
 
 ### Artefacts
-*If the App creates artefacts (e.g. csv, pdf, jpeg, shapefiles, etc), please list them here and describe each.*
+depending on the setting below, there are one or two csv artefacts:
 
-*Example:* `rest_overview.csv`: csv-file with Table of all rest site properties
+`data_and_trackInfo.csv`: the whole data set as a csv table (including only columns that are not all NA) with track information merged to the location data. This introduces quite a lot of dupliation, but might be required in some cases.
+
+`data.csv`: the whole data set as a csv table, including only columns that are not all NA.
+
+`trackInfo.csv`: the track information of the data set as a csv table. Note that the key attribute is called `track`.
 
 ### Settings 
-*Please list and define all settings/parameters that the App requires to be set by the App user, if necessary including their unit.*
-
-*Example:* `Radius of resting site` (radius): Defined radius the animal has to stay in for a given duration of time for it to be considered resting site. Unit: `metres`.
+**`Merge data and track information` (track_add):** Select if the track information shall be integrated/merged with the location data and written as one csv file (TRUE). Alternatively, two files are provided (FALSE). Default: FALSE.
 
 ### Most common errors
-*Please describe shortly what most common errors of the App can be, how they occur and best ways of solving them.*
+please make an issue here if you encounter repeated problems
 
 ### Null or error handling
-*Please indicate for each setting as well as the input data which behaviour the App is supposed to show in case of errors or NULL values/input. Please also add notes of possible errors that can happen if settings/parameters are improperly set and any other important information that you find the user should be aware of.*
-
-*Example:* **Setting `radius`:** If no radius AND no duration are given, the input data set is returned with a warning. If no radius is given (NULL), but a duration is defined then a default radius of 1000m = 1km is set. 
+**Data:** The full input data set is returned for further use in a next App and cannot be empty.
