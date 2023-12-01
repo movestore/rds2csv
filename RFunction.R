@@ -12,6 +12,7 @@ rFunction <- function(data)
   infos.pr <-c("trackId","timestamp","location.long","location.lat")
   infos.pr.ix <- which(names(data.csv.nona) %in% c("trackId","timestamp","location.long","location.lat"))
   data.csv.nona.pr <- data.frame(data.csv.nona[,infos.pr],data.csv.nona[,-infos.pr.ix])
+  data.csv.nona.pr$timestamp <- strftime(data.csv.nona.pr$timestamp, tz='UTC', usetz=F, format = "%Y-%m-%d %H:%M:%OS3")
     
   write.csv(data.csv.nona.pr, file = paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"),"data.csv"),row.names=FALSE)
   #write.csv(data.csv.nona.pr, file = "data.csv",row.names=FALSE)
