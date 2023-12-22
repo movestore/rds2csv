@@ -1,3 +1,4 @@
 {
-    "track_add": true
+    "timezoneUTC": false,
+    "crsLonLat": false
 }

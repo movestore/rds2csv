@@ -1,21 +1,26 @@
 {
+  "version": "1.1",
   "settings": [
-    {	
-      "id": "track_add",
-      "name": "Merge data and track information",
-      "description": "Check if you want the location data and track information (e.g. properties of the tagged animal) integrated in one csv file. Else two separate files will be generated.",
-      "defaultValue": false,
-      "type": "CHECKBOX"
-    }
+    {
+  "id": "timezoneUTC",
+  "name": "Timezone in UTC",
+  "description": "Check the box to ensure the timestamps are in UTC. If unchecked, the timestamps will be in the timezone of the data (this will be displayed in the logs of the app once it has run)",
+  "type": "CHECKBOX",
+  "defaultValue": true
+},
+{
+  "id": "crsLonLat",
+  "name": "Coordenate system of the data in Lon/Lat (EPSG:4326)",
+  "description": "Check the box to ensure the data are in the geographic coordinate system (lon/lat) 'EPSG:4326'. If unchecked, the coordinates will be retained in the current projection (this will be displayed in the logs of the app once it has run)",
+  "type": "CHECKBOX",
+  "defaultValue": true
+}
   ],
   "dependencies": {
     "R": [
-      {
-        "name": "move2"
-      },
-	  {
-	    "name": "lubridate"
-	  }
+      {"name": "move2"},
+	    {"name": "lubridate"},
+	    {"name": "sf"}
     ]
   },
   "createsArtifacts": true,
@@ -43,9 +48,16 @@
       "orcid": "0000-0003-0193-1563",
       "affiliation": "Max-Planck-Institute of Animal Behavior",
       "affiliationRor": "https://ror.org/026stee22"
+    },
+     {
+      "firstName": "Anne",
+      "middleInitials": "K",
+      "lastName": "Scharf",
+      "email": "ascharf@ab.mpg.de",
+      "roles": ["author"],
+      "orcid": "0000-0002-3357-8533",
+      "affiliation": "Max-Planck-Institute of Animal Behavior",
+      "affiliationRor": "https://ror.org/026stee22"
     }
-  ],
-  "documentation": {
-    "url": "https://github.com/movestore/rds2csv/blob/master/README.md"
-  }
+  ]
 }
