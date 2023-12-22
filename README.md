@@ -7,7 +7,7 @@ Github repository: *github.com/movestore/rds2csv*
 Movement data (in R-format rds) is transformed into a csv-data.frame that is returned as artefakt and can be downloaded. The original data set is also passed on as output to a possible next App. 
 
 ## Documentation
-The input Movement data set is transformed into a table (data frame) with a row for each location and columns indicating the timestamp, individual, location coordiantes (longitude, latitude) and other properties of the location. For better readability, only properties (columns) with (non-NA) information in at least one row are retained. This table is returned as an artefact named `data.csv`.
+The input Movement data set is transformed into a table (data frame) with a row for each location and columns indicating the timestamp, individual, location coordiantes (longitude, latitude) and other properties of the location. For better readability, only properties (columns) with (non-NA) information in at least one row are retained. This table is returned as an artefact named `data.csv`. Given that the same (or similar) information can be contained in several columns, the first 4 columns of the table refer to the track id, the timestamps and the cooordinates that were used to do any previous calculation.
 
 ### Input data
 moveStack in Movebank format
