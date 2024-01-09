@@ -5,10 +5,10 @@ MoveApps
 Github repository: *github.com/movestore/rds2csv*
 
 ## Description
-Movement data (in R-format rds) is transformed into a csv table that is returned as artefact and can be downloaded. Two files are returned, one containing all data, and one containing only the information associated to the tracks. The original data set is also passed on as output to a possible next App. 
+Movement data (in R-format rds) is transformed into a table in csv format provided as an artefact for download. Two files are returned, one containing all data, and one containing only the information associated to the tracks. The original data set is also passed on as output for use by a subsequent App.
 
 ## Documentation
-The input Movement data set is transformed into a table with a row for each location and columns indicating the track IDs, timestamps, location coordiantes and other properties of the locations. For better readability, columns that only contain NA/empty values are removed. Additionally a table containing only the attributes associated to the tracks (e.g. name, tag, sex, study) is also provided.
+The input Movement dataset (an object of class move2 in R's rds format) is transformed into a table with a row for each event and columns indicating the track IDs, timestamps, location coordinates and other properties of each event record. For better readability, columns that only contain NA/empty values are removed. Additionally a table containing only the attributes associated to the tracks (e.g. name, tag, sex, study) is also provided.
 
 The column containing the timestamps is formatted to include three decimals in the seconds, so that the format will be fit for submission to annotation with EnvDATA in Movebank.
 
