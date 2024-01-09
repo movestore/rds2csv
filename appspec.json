@@ -4,14 +4,14 @@
     {
   "id": "timezoneUTC",
   "name": "Timezone in UTC",
-  "description": "Check the box to ensure the timestamps are in UTC. If unchecked, the timestamps will be in the timezone of the data (this will be displayed in the logs of the app once it has run)",
+  "description": "Check the box to ensure the timestamps are in UTC. If unchecked, the timestamps will be in the timezone of the data (which will be displayed in the logs of the app once it has run)",
   "type": "CHECKBOX",
   "defaultValue": true
 },
 {
   "id": "crsLonLat",
   "name": "Coordenate system of the data in Lon/Lat (EPSG:4326)",
-  "description": "Check the box to ensure the data are in the geographic coordinate system (lon/lat) 'EPSG:4326'. If unchecked, the coordinates will be retained in the current projection (this will be displayed in the logs of the app once it has run)",
+  "description": "Check the box to ensure the data are in the geographic coordinate system (lon/lat) 'EPSG:4326'. If unchecked, the coordinates will be retained in the current projection (which will be displayed in the logs of the app once it has run)",
   "type": "CHECKBOX",
   "defaultValue": true
 }
