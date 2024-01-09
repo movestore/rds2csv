@@ -42,7 +42,6 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   ## only track attributes table
   track.info <- mt_track_data(data)
   track.info.ord <- track.info %>% select(mt_track_id_column(data), everything())
-  names(track.info.ord) <- make.names(names(track.info.ord),allow_=FALSE)
   write.csv(track.info.ord, file = appArtifactPath("trackInfo.csv"),row.names=FALSE)
   
   result <- data

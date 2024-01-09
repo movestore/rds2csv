@@ -20,7 +20,8 @@
     "R": [
       {"name": "move2"},
 	    {"name": "lubridate"},
-	    {"name": "sf"}
+	    {"name": "sf"},
+	    {"name": "dplyr"}
     ]
   },
   "createsArtifacts": true,
