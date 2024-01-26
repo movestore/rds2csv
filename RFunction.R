@@ -41,6 +41,13 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   
   ## only track attributes table
   track.info <- mt_track_data(data)
+  
+  # converting the "point" columns into characters
+  sfc_cols <- names(track.info)[unlist(lapply(track.info, inherits, 'sfc'))]
+  for(x in sfc_cols){
+    track.info[[x]] <- st_as_text(track.info[[x]])
+  }
+  
   track.info.ord <- track.info %>% select(mt_track_id_column(data), everything())
   write.csv(track.info.ord, file = appArtifactPath("trackInfo.csv"),row.names=FALSE)
   
