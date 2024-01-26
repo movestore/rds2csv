@@ -27,9 +27,16 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   if(!crsLonLat){logger.info(paste0("The projection of your data is: ",st_crs(data.save)[[1]],"."))}
   
   ## steps to convert move2 into data frame without loosing info
+  
+  sfc_cols.1 <- names(mt_track_data(data.save))[unlist(lapply(mt_track_data(data.save), inherits, 'sfc'))] ## get the col names that are spacial from the track table
+  
   data.save <- mt_as_event_attribute(data.save, names(mt_track_data(data.save))) ## puts all the track attributes in the event attribute table
   data.save <- dplyr::mutate(data.save, coords_x=sf::st_coordinates(data.save)[,1],
                              coords_y=sf::st_coordinates(data.save)[,2]) ## creates columns for coordinates
+  for(x in sfc_cols.1){ # converting the "point" columns into characters
+    data.save[[x]] <- st_as_text(data.save[[x]])
+  }
+  
   data.csv <- data.frame(sf::st_drop_geometry(data.save)) # removes the sf geometry column from the table
   
   data.csv.nona <- data.csv[,!sapply(data.csv, function(x) all(is.na(x)))]
@@ -41,7 +48,14 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   
   ## only track attributes table
   track.info <- mt_track_data(data)
-  track.info.ord <- track.info %>% select(mt_track_id_column(data), everything())
+  
+  # converting the "point" columns into characters
+  sfc_cols.2 <- names(track.info)[unlist(lapply(track.info, inherits, 'sfc'))]
+  for(x in sfc_cols.2){
+    track.info[[x]] <- st_as_text(track.info[[x]])
+  }
+  
+  track.info.ord <- track.info %>% dplyr::select(mt_track_id_column(data), everything())
   write.csv(track.info.ord, file = appArtifactPath("trackInfo.csv"),row.names=FALSE)
   
   result <- data
