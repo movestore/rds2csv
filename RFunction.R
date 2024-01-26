@@ -27,7 +27,6 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   if(!crsLonLat){logger.info(paste0("The projection of your data is: ",st_crs(data.save)[[1]],"."))}
   
   ## steps to convert move2 into data frame without loosing info
-  
   sfc_cols.1 <- names(mt_track_data(data.save))[unlist(lapply(mt_track_data(data.save), inherits, 'sfc'))] ## get the col names that are spacial from the track table
   
   data.save <- mt_as_event_attribute(data.save, names(mt_track_data(data.save))) ## puts all the track attributes in the event attribute table
@@ -49,7 +48,7 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   ## only track attributes table
   track.info <- mt_track_data(data)
   
-  # converting the "point" columns into characters
+  ## converting the "point" columns into characters
   sfc_cols.2 <- names(track.info)[unlist(lapply(track.info, inherits, 'sfc'))]
   for(x in sfc_cols.2){
     track.info[[x]] <- st_as_text(track.info[[x]])
