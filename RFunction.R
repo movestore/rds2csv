@@ -44,6 +44,8 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   infos.pr.ix <- which(names(data.csv.nona) %in% infos.pr)
   data.csv.nona.pr <- data.frame(data.csv.nona[,infos.pr],data.csv.nona[,-infos.pr.ix])
   data.csv.nona.pr[,2] <- format(data.csv.nona.pr[,2],format="%Y-%m-%d %H:%M:%OS3") # if milliseconds are 0, than as.POSIXct removes them. Here it ensures that if there are miliseconds present, they are taken, and if there are none, .000 is added ==> request from Sarah for correct Movebank/EnvDATA input format -- adding milliseconds
+  
+  #if want to write csv, here we get an error, because some columns are lists.. Anne, we had talked about this before, do you have a solution?
   write.csv(data.csv.nona.pr, file = appArtifactPath("data.csv"),row.names=FALSE)
   
   ## only track attributes table
