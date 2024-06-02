@@ -26,6 +26,24 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   }
   if(!crsLonLat){logger.info(paste0("The projection of your data is: ",st_crs(data.save)[[1]],"."))}
   
+  
+  ## checking if there are columns in the track data that are a list. If yes, check if the content is the same, if yes remove list. If list columns are left over because content is different transform these into a character string (could be done as well as json, but think that average user will be more comfortable with text?)
+  if(any(sapply(mt_track_data(data.save), is.list))){
+    ## reduce all columns were entry is the same to one (so no  list anymore)
+    data.save <- data.save |> mutate_track_data(across(
+      where( ~is.list(.x) && all(purrr::map_lgl(.x, function(y) 1==length(unique(y)) ))), 
+      ~do.call(vctrs::vec_c,purrr::map(.x, head,1))))
+    if(any(sapply(mt_track_data(data.save), is.list))){
+      ## transform those that are still a list into a character string
+      data.save <- data.save |> mutate_track_data(across(
+        where( ~is.list(.x) && all(purrr::map_lgl(.x, function(y) 1!=length(unique(y)) ))), 
+        ~unlist(purrr::map(.x, paste, collapse=","))))
+    }
+  }
+  
+  ## only track attributes table -- saving here output at the end 
+  track.info <- mt_track_data(data.save)
+  
   ## steps to convert move2 into data frame without loosing info
   data.save <- mt_as_event_attribute(data.save, names(mt_track_data(data.save)))
   data.save <- dplyr::mutate(data.save, coords_x=sf::st_coordinates(data.save)[,1],
@@ -45,12 +63,10 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   data.csv.nona.pr <- data.frame(data.csv.nona[,infos.pr],data.csv.nona[,-infos.pr.ix])
   data.csv.nona.pr[,2] <- format(data.csv.nona.pr[,2],format="%Y-%m-%d %H:%M:%OS3") # if milliseconds are 0, than as.POSIXct removes them. Here it ensures that if there are miliseconds present, they are taken, and if there are none, .000 is added ==> request from Sarah for correct Movebank/EnvDATA input format -- adding milliseconds
   
-  #if want to write csv, here we get an error, because some columns are lists.. Anne, we had talked about this before, do you have a solution?
   write.csv(data.csv.nona.pr, file = appArtifactPath("data.csv"),row.names=FALSE)
   
-  ## only track attributes table
-  track.info <- mt_track_data(data)
   
+  ## saving only track data table
   ## converting the "point" columns into characters
   sfc_cols.2 <- names(track.info)[unlist(lapply(track.info, inherits, 'sfc'))]
   for(x in sfc_cols.2){
