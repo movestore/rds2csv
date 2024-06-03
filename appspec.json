@@ -23,7 +23,8 @@
 	    {"name": "sf"},
 	    {"name": "dplyr"},
 	    {"name": "purrr"},
-	    {"name": "vctrs"}
+	    {"name": "vctrs"},
+	    {"name": "rlang"}
     ]
   },
   "createsArtifacts": true,

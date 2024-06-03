@@ -4,6 +4,7 @@ library("sf")
 library("dplyr")
 library("vctrs")
 library("purrr")
+library("rlang")
 
 rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   options(digits.secs=3)
@@ -30,15 +31,15 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   
   
   ## checking if there are columns in the track data that are a list. If yes, check if the content is the same, if yes remove list. If list columns are left over because content is different transform these into a character string (could be done as well as json, but think that average user will be more comfortable with text?)
-  if(any(sapply(mt_track_data(data.save), is.list))){
-    ## reduce all columns were entry is the same to one (so no  list anymore)
+  if(any(sapply(mt_track_data(data.save), is_bare_list))){
+    ## reduce all columns were entry is the same to one (so no list anymore)
     data.save <- data.save |> mutate_track_data(across(
-      where( ~is.list(.x) && all(purrr::map_lgl(.x, function(y) 1==length(unique(y)) ))), 
+      where( ~is_bare_list(.x) && all(purrr::map_lgl(.x, function(y) 1==length(unique(y)) ))), 
       ~do.call(vctrs::vec_c,purrr::map(.x, head,1))))
-    if(any(sapply(mt_track_data(data.save), is.list))){
+    if(any(sapply(mt_track_data(data.save), is_bare_list))){
       ## transform those that are still a list into a character string
       data.save <- data.save |> mutate_track_data(across(
-        where( ~is.list(.x) && all(purrr::map_lgl(.x, function(y) 1!=length(unique(y)) ))), 
+        where( ~is_bare_list(.x) && all(purrr::map_lgl(.x, function(y) 1!=length(unique(y)) ))), 
         ~unlist(purrr::map(.x, paste, collapse=","))))
     }
   }
