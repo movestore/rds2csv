@@ -2,6 +2,8 @@ library('move2')
 library('lubridate')
 library("sf")
 library("dplyr")
+library("vctrs")
+library("purrr")
 
 rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
   options(digits.secs=3)

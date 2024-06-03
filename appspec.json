@@ -21,7 +21,9 @@
       {"name": "move2"},
 	    {"name": "lubridate"},
 	    {"name": "sf"},
-	    {"name": "dplyr"}
+	    {"name": "dplyr"},
+	    {"name": "purrr"},
+	    {"name": "vctrs"}
     ]
   },
   "createsArtifacts": true,
