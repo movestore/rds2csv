@@ -1,0 +1,63 @@
+{
+  "version": "1.1",
+  "settings": [
+    {
+  "id": "timezoneUTC",
+  "name": "Timezone in UTC",
+  "description": "Check the box to ensure the timestamps are in UTC. If unchecked, the timestamps will be in the timezone of the data (which will be displayed in the logs of the app once it has run)",
+  "type": "CHECKBOX",
+  "defaultValue": true
+},
+{
+  "id": "crsLonLat",
+  "name": "Coordenate system of the data in Lon/Lat (EPSG:4326)",
+  "description": "Check the box to ensure the data are in the geographic coordinate system (lon/lat) 'EPSG:4326'. If unchecked, the coordinates will be retained in the current projection (which will be displayed in the logs of the app once it has run)",
+  "type": "CHECKBOX",
+  "defaultValue": true
+}
+  ],
+  "dependencies": {
+    "R": [
+      {"name": "move2"},
+	    {"name": "lubridate"},
+	    {"name": "sf"}
+    ]
+  },
+  "createsArtifacts": true,
+  "license": {
+    "key": "MIT"
+  },
+  "language": "eng",
+  "keywords": [
+    "rds",
+    "csv",
+    "transformation",
+	"data",
+	"table"
+  ],
+   "people": [
+    {
+     "firstName": "Andrea",
+      "middleInitials": null,
+      "lastName": "Kölzsch",
+      "email": "akoelzsch@ab.mpg.de",
+      "roles": [
+        "author",
+        "creator"
+      ],
+      "orcid": "0000-0003-0193-1563",
+      "affiliation": "Max-Planck-Institute of Animal Behavior",
+      "affiliationRor": "https://ror.org/026stee22"
+    },
+     {
+      "firstName": "Anne",
+      "middleInitials": "K",
+      "lastName": "Scharf",
+      "email": "ascharf@ab.mpg.de",
+      "roles": ["author"],
+      "orcid": "0000-0002-3357-8533",
+      "affiliation": "Max-Planck-Institute of Animal Behavior",
+      "affiliationRor": "https://ror.org/026stee22"
+    }
+  ]
+}

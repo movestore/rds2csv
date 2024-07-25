@@ -1,0 +1,26 @@
+{
+    "id": "1F8EA822",
+    "path": "~/GIT_SYNC/MoveAppsGit/rds2csv/.env",
+    "project_path": ".env",
+    "type": "text",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1704802827222.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "3,44",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1717497015,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1717497015752,
+    "read_only": false,
+    "read_only_alternatives": []
+}
