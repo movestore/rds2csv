@@ -58,12 +58,12 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
     data.save[[x]] <- st_as_text(data.save[[x]])
   } ## st_as_sfc() can be used to convert these columns back to spacial
   
-  data.csv <- data.frame(data.save)
+  data.csv <- data.frame(data.save, check.names=F) ## uses make.make names! changes "individual-local-identifier" to "individual.local.identifier"
   
   data.csv.nona <- data.csv[,!sapply(data.csv, function(x) all(is.na(x)))]
   infos.pr <-c(mt_track_id_column(data.save),mt_time_column(data.save),"coords_x","coords_y")
   infos.pr.ix <- which(names(data.csv.nona) %in% infos.pr)
-  data.csv.nona.pr <- data.frame(data.csv.nona[,infos.pr],data.csv.nona[,-infos.pr.ix])
+  data.csv.nona.pr <- data.frame(data.csv.nona[,infos.pr],data.csv.nona[,-infos.pr.ix], check.names=F)
   data.csv.nona.pr[,2] <- format(data.csv.nona.pr[,2],format="%Y-%m-%d %H:%M:%OS3") # if milliseconds are 0, than as.POSIXct removes them. Here it ensures that if there are miliseconds present, they are taken, and if there are none, .000 is added ==> request from Sarah for correct Movebank/EnvDATA input format -- adding milliseconds
   
   write.csv(data.csv.nona.pr, file = appArtifactPath("data.csv"),row.names=FALSE)
@@ -76,7 +76,7 @@ rFunction = function(data, timezoneUTC=T, crsLonLat=T) {
     track.info[[x]] <- st_as_text(track.info[[x]])
   }
   
-  track.info.ord <- track.info %>% dplyr::select(mt_track_id_column(data), everything())
+  track.info.ord <- track.info %>% dplyr::select(mt_track_id_column(data.save), everything())
   write.csv(track.info.ord, file = appArtifactPath("trackInfo.csv"),row.names=FALSE)
   
   result <- data
